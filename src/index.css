@@ -11,3 +11,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.text-success {
+  color: green;
+}
+
+.text-danger {
+  color: red;
+}
+
+.table {
+  margin-top: 20px;
+  width: 100%;
+  overflow-x: auto;
+}

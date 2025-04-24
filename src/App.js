@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { updateCrypto } from "./features/cryptoslice";
+import Cryptotable from "./components/Cryptotable";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Simulate updates for a random crypto
+      const randomId = Math.ceil(Math.random() * 5); // Assuming 5 cryptos
+      dispatch(
+        updateCrypto({
+          id: randomId,
+          changes: {
+            price: (Math.random() * 100000).toFixed(2),
+            percent1h: (Math.random() * 10 - 5).toFixed(2),
+          },
+        })
+      );
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, [dispatch]);
+
+  return <Cryptotable />;
+};
 
 export default App;
